@@ -12,6 +12,8 @@ pipeline {
             steps {
                 echo "-=- preparing project environment -=-"
                 // Python dependencies
+                sh "virtualenv .venv"
+                sh "source .venv/bin/activate"
                 sh "pip install numpy --user"
                 sh "python main.py"
             }
