@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "-=- preparing project environment -=-"
                 // Python dependencies
-                sh "python example.py"
+                sh "python main.py"
             }
         }
     }
