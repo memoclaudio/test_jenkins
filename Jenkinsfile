@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "-=- preparing project environment -=-"
                 // Python dependencies
-                sh "python -m pip install numpy --user"
+                sh "python -m pip install numpy"
                 sh "python main.py"
             }
         }
