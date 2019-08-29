@@ -3,7 +3,7 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.7'
+            image 'python3.6'
         }
     }
 
@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo "-=- preparing project environment -=-"
                 // Python dependencies
+                sh "pip install numpy"
                 sh "python main.py"
             }
         }
