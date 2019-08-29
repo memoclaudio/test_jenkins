@@ -15,6 +15,15 @@ pipeline {
                 sh "python main.py"
             }
         }
+
+        stage('Unit test') {
+            steps {
+                echo "-=- Running unit test -=-"
+                // Python dependencies
+                sh "python test.py"
+            }
+        }
+
     }
 
 }
