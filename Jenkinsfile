@@ -26,6 +26,10 @@ pipeline {
             }
         }
 
+        stage('Build Image'){
+            sh "docker build -t jenkins-build/cib-news"
+        }
+
     }
 
 }
