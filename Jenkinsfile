@@ -27,7 +27,11 @@ pipeline {
         }
 
         stage('Build Image'){
-            sh "docker build -t jenkins-build/cib-news"
+            steps {
+                echo "-=- Bulding Docker Image -=-"
+                // Python dependencies
+                sh "docker build -t jenkins-build/cib-news"
+            }
         }
 
     }
