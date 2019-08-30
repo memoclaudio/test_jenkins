@@ -30,7 +30,9 @@ pipeline {
             steps {
                 echo "-=- Bulding Docker Image -=-"
                 // Python dependencies
-                sh "docker build -t jenkins-build/cib-news"
+                def customImage = docker.build("jenkins-build/cib-news")
+                customImage.push()
+
             }
         }
 
