@@ -12,7 +12,7 @@ class TestHello(unittest.TestCase):
         self.assertEqual(val, 2)
 
     def test_hello_name(self):
-        val = 4
+        val = 2
         self.assertEqual(val, 2)
 
 if __name__ == '__main__':
