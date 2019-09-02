@@ -2,14 +2,6 @@ node {
      	
      	withDockerContainer(image:'python:3.7',args:'--name cib-news -u root -v /var/run/docker.sock:/var/run/docker.sock') { 
 
-	        stage('Environment preparation') {
-	                echo "-=- preparing project environment -=-"
-	                // Python dependencies
-	                sh "apt-get update"
-	                sh "apt-get -y install apt-transport-https ca-certificates curl software-properties-common"
-	                sh "curl -fsSL https://download.docker.com/linux/debian/gpg > /tmp/dkey && apt-key add /tmp/dkey && add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/debian buster stable\" && apt-get update && apt-get -y install docker-ce"
-	        }
-
 	        stage ('Python Dependencies Installation'){
 	        	sh "python -m pip install numpy"
 	            sh "python main.py"
@@ -17,14 +9,15 @@ node {
 
 	        stage('Unit test') {
 	                echo "-=- Running unit test -=-"
-	                // Python dependencies
 	                sh "python test.py"
 	        }
 
 
     		stage('Build Docker Image') {
 	                echo "-=- Bulding Docker Image-=-"
-	                // Python dependencies
+	                sh "apt-get update"
+	                sh "apt-get -y install apt-transport-https ca-certificates curl software-properties-common"
+	                sh "curl -fsSL https://download.docker.com/linux/debian/gpg > /tmp/dkey && apt-key add /tmp/dkey && add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/debian buster stable\" && apt-get update && apt-get -y install docker-ce"
 	                sh "docker commit cib-news builds/cib-news"
 	        }
 
