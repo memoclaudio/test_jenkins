@@ -1,7 +1,6 @@
 node {
      	
      	withDockerContainer('python:3.6') { 
-	stages{
 
 	        stage('Environment preparation') {
 	            steps {
@@ -19,8 +18,6 @@ node {
 	                sh "python test.py"
 	            }
 	        }
-    	
-    	}
 
 	}
 }
