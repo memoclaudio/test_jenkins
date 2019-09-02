@@ -38,7 +38,7 @@ pipeline {
             steps {
                 echo "-=- Build Docker Image -=-"
                 sh "docker commit cib-news builds/cib-news"
-                sh "docker rmi \$(docker images -f \"dangling=true\" -q)"
+                sh "docker rmi $(docker images -f \"dangling=true\" -q)"
             }
         }
 
