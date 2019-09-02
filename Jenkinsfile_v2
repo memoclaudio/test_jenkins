@@ -1,6 +1,6 @@
 node {
      	
-     	withDockerContainer('python:3.6', args='-u root') { 
+     	withDockerContainer('python:3.6') { 
 	stages{
 
 	        stage('Environment preparation') {
