@@ -25,14 +25,17 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps{
+        stage('Prepare Docker') {
+            steps {
                 echo "-=- Prepare Docker -=-"
                 sh "apt-get update"
                 sh "apt-get -y install apt-transport-https ca-certificates curl software-properties-common"
                 sh "curl -fsSL https://download.docker.com/linux/debian/gpg > /tmp/dkey && apt-key add /tmp/dkey && add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/debian buster stable\" && apt-get update && apt-get -y install docker-ce"
             }
-            steps{
+        }
+
+        stage('Build Docker Image') {
+            steps {
                 echo "-=- Build Docker Image -=-"
                 sh "docker commit cib-news builds/cib-news"
                 sh "docker rmi \$(docker images -f \"dangling=true\" -q)"
