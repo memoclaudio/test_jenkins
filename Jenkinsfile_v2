@@ -3,7 +3,7 @@ node {
      	withDockerContainer('python:3.6') { 
 
 	        stage('Environment preparation') {
-	            steps {
+	            step {
 	                echo "-=- preparing project environment -=-"
 	                // Python dependencies
 	                sh "python -m pip install numpy"
@@ -12,7 +12,7 @@ node {
 	        }
 
 	        stage('Unit test') {
-	            steps {
+	            step {
 	                echo "-=- Running unit test -=-"
 	                // Python dependencies
 	                sh "python test.py"
