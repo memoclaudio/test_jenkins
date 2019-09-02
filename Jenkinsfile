@@ -26,16 +26,6 @@ pipeline {
             }
         }
 
-        stage('Build Image'){
-            steps {
-                echo "-=- Bulding Docker Image -=-"
-                // Python dependencies
-                script {
-                    docker.build("jenkins-build/cib-news")
-                }
-            }
-        }
-
     }
 
     post {
