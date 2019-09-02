@@ -5,6 +5,7 @@ node {
 	        stage('Environment preparation') {
 	                echo "-=- preparing project environment -=-"
 	                // Python dependencies
+	                sh "apt-get update"
 	                sh "apt-get -y install apt-transport-https \
      ca-certificates \
      curl \
