@@ -1,10 +1,11 @@
 #!groovy
 
 pipeline {
+    
     agent {
         docker {
             image 'python:3.6'
-            args '-u root --name cib-news'
+            args '-u root --name cib-news -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
 
@@ -12,7 +13,6 @@ pipeline {
         stage('Environment preparation') {
             steps {
                 echo "-=- preparing project environment -=-"
-                // Python dependencies
                 sh "python -m pip install numpy"
                 sh "python main.py"
             }
@@ -21,8 +21,18 @@ pipeline {
         stage('Unit test') {
             steps {
                 echo "-=- Running unit test -=-"
-                // Python dependencies
                 sh "python test.py"
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps{
+                echo "-=- Bulding Docker Image-=-"
+                sh "apt-get update"
+                sh "apt-get -y install apt-transport-https ca-certificates curl software-properties-common"
+                sh "curl -fsSL https://download.docker.com/linux/debian/gpg > /tmp/dkey && apt-key add /tmp/dkey && add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/debian buster stable\" && apt-get update && apt-get -y install docker-ce"
+                sh "docker commit cib-news builds/cib-news"
+                sh "docker rmi \$(docker images -f \"dangling=true\" -q)"
             }
         }
 
@@ -30,8 +40,8 @@ pipeline {
 
     post {
         cleanup {
-            echo "-=- remove deployment -=-"
-            sh "docker commit cib-news builds/cib-news"
+            echo "-=- Clean -=-"
+            sh "docker rmi \$(docker images -f \"dangling=true\" -q)"
         }
     }
 
