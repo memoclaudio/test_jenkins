@@ -16,11 +16,9 @@ node {
 	        }
 	}
 
-    post {
-        cleanup {
-            echo "-=- remove deployment -=-"
-            sh "docker commit cib-news builds/cib-news"
-        }
+    stage('Build Docker Image') {
+        echo "-=- remove deployment -=-"
+    	sh "docker commit cib-news builds/cib-news"
     }
 
 }
