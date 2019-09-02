@@ -1,6 +1,6 @@
 node {
      	
-     	withDockerContainer('python:3.6') { 
+     	withDockerContainer(image:'python:3.6',args:'-u root') { 
 
 	        stage('Environment preparation') {
 	                echo "-=- preparing project environment -=-"
