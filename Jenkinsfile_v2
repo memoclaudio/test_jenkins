@@ -1,6 +1,6 @@
 node {
      	
-     	withDockerContainer(image:'python:3.6',args:'--name cib-news -u root') { 
+     	withDockerContainer(image:'python:3.7',args:'--name cib-news -u root -v /var/run/docker.sock:/var/run/docker.sock') { 
 
 	        stage('Environment preparation') {
 	                echo "-=- preparing project environment -=-"
