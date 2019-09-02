@@ -1,6 +1,6 @@
 node {
      	
-     	withDockerContainer(image:'python:3.6',args:'-u root') { 
+     	withDockerContainer(image:'python:3.6',args:'--name cib-news -u root') { 
 
 	        stage('Environment preparation') {
 	                echo "-=- preparing project environment -=-"
@@ -14,6 +14,13 @@ node {
 	                // Python dependencies
 	                sh "python test.py"
 	        }
-
 	}
+
+    post {
+        cleanup {
+            echo "-=- remove deployment -=-"
+            sh "docker commit cib-news builds/cib-news"
+        }
+    }
+
 }
