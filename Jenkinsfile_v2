@@ -1,6 +1,6 @@
 node {
      	
-     	withDockerContainer(image:'python:3.7',args:'--name cib-news -u root -v /var/run/docker.sock:/var/run/docker.sock') { 
+     	withDockerContainer(image:'python:3.6',args:'--name cib-news -u root -v /var/run/docker.sock:/var/run/docker.sock') { 
 
 	        stage ('Python Dependencies Installation'){
 	        	sh "python -m pip install numpy"

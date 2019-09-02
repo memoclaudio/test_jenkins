@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-    
+
     agent {
         docker {
             image 'python:3.6'
@@ -36,13 +36,6 @@ pipeline {
             }
         }
 
-    }
-
-    post {
-        cleanup {
-            echo "-=- Clean -=-"
-            sh "docker rmi \$(docker images -f \"dangling=true\" -q)"
-        }
     }
 
 }
