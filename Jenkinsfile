@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker {
             image 'python:3.6'
-            args '-u root'
+            args '-u root --name build/cib-news'
         }
     }
 
@@ -36,6 +36,13 @@ pipeline {
             }
         }
 
+    }
+
+    post {
+        always {
+            echo "-=- remove deployment -=-"
+            sh "docker commit build/cib-news cib-news"
+        }
     }
 
 }
