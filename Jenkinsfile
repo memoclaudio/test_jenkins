@@ -29,7 +29,7 @@ pipeline {
     }
 
     post {
-        always {
+        cleanup {
             echo "-=- remove deployment -=-"
             sh "docker commit cib-news builds/cib-news"
         }
