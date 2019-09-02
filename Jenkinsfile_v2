@@ -6,13 +6,13 @@ node {
 	                echo "-=- preparing project environment -=-"
 	                // Python dependencies
 	                sh "apt-get update"
-	                sh "apt-get -y install apt-transport-https \
-     ca-certificates \
-     curl \
-     software-properties-common"
+	                sh "apt-get -y install apt-transport-https ca-certificates curl software-properties-common"
 	                sh "curl -fsSL https://download.docker.com/linux/debian/gpg > /tmp/dkey && apt-key add /tmp/dkey && add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/debian buster stable\" && apt-get update && apt-get -y install docker-ce"
-	                sh "python -m pip install numpy"
-	                sh "python main.py"
+	        }
+
+	        stage ('Python Dependencies Installation'){
+	        	sh "python -m pip install numpy"
+	            sh "python main.py"
 	        }
 
 	        stage('Unit test') {
@@ -23,7 +23,7 @@ node {
 
 
     		stage('Build Docker Image') {
-	                echo "-=- Running unit test -=-"
+	                echo "-=- Bulding Docker Image-=-"
 	                // Python dependencies
 	                sh "docker commit cib-news builds/cib-news"
 	        }
