@@ -5,6 +5,7 @@ node {
 	        stage('Environment preparation') {
 	                echo "-=- preparing project environment -=-"
 	                // Python dependencies
+	                sh "apt-get -y install docker-ce"
 	                sh "python -m pip install numpy"
 	                sh "python main.py"
 	        }
